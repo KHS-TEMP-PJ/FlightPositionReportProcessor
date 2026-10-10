@@ -2,7 +2,8 @@
 
 Production-minded learning project using .NET 8 Lambda functions and a TypeScript AWS CDK v2 application.[cite: 4]
 
-## Architecture[cite: 4]
+## Architecture
+
 ```mermaid
 flowchart LR
 C[Client] -->|POST /pos-reports| A[API Gateway]
@@ -20,7 +21,6 @@ C -->|GET /status/flightId| A
 A --> T[Status Lambda]
 T --> D1
 T --> D2
-```[cite: 4]
 
 ## Repository[cite: 4]
 * `application/FlightReportProcessor`: handlers, domain logic, and AWS adapters.[cite: 4]
