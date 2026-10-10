@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/application/FlightReportProcessor/obj
+/tests/FlightPositionReportProcessor.Tests/bin/Debug/net8.0
+/tests/FlightPositionReportProcessor.Tests/obj

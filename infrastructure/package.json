@@ -1,0 +1,23 @@
+{
+  "name": "flight-position-infrastructure",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --passWithNoTests",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --require-approval never",
+    "destroy": "cdk destroy --force"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.251.0",
+    "constructs": "10.5.0",
+    "source-map-support": "0.5.21"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.0",
+    "aws-cdk": "2.1139.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.2"
+  }
+}
