@@ -6,21 +6,26 @@ Production-minded learning project using .NET 8 Lambda functions and a TypeScrip
 
 ```mermaid
 flowchart LR
-C[Client] -->|POST /pos-reports| A[API Gateway]
-A --> I[Ingestion Lambda]
-I -->|pos/raw| S3[S3]
-S3 -->|ObjectCreated pos/| P[Parser Lambda]
-P -->|attachment/ JSON| S3
-P -->|D1| D1[(Results DynamoDB)]
-P -->|Q| SQS[SQS]
-Q --> L[Calculator Lambda]
-Q -->|max receives ->| DLQ[Dead-letter queue]
-L -->|results/ JSON| S3
-L -->|D2| D2[(Results DynamoDB)]
-C -->|GET /status/flightId| A
-A --> T[Status Lambda]
-T --> D1
-T --> D2
+    C[Client] -->|POST /pos-reports| A[API Gateway]
+    A --> I[Ingestion Lambda]
+    I -->|pos/raw| S3[(S3 Bucket)]
+    S3 -->|ObjectCreated: pos/| P[Parser Lambda]
+
+    P -->|attachment JSON| S3
+    P -->|D1: parsed metadata| D1[(Parsed Results DynamoDB)]
+    P -->|Q: enqueue calculation| SQS[SQS Queue]
+
+    SQS --> L[Calculator Lambda]
+    SQS -->|Max receives exceeded| DLQ[Dead-letter Queue]
+
+    L -->|results JSON| S3
+    L -->|D2: calculated metadata| D2[(Calculated Results DynamoDB)]
+
+    C -->|GET /status/flightId| A
+    A --> T[Status Lambda]
+    T --> D1
+    T --> D2
+```
 
 ## Repository[cite: 4]
 * `application/FlightReportProcessor`: handlers, domain logic, and AWS adapters.[cite: 4]
